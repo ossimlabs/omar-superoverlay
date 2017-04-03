@@ -1,6 +1,6 @@
 spring:
   application:
-    name: o2-superoverlay
+    name: omar-superoverlay
   cloud:
     config:
       enabled: false
