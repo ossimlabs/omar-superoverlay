@@ -5,7 +5,6 @@ import geoscript.geom.Bounds
 import geoscript.proj.Projection
 import grails.validation.Validateable
 import groovy.transform.ToString
-import joms.oms.ossimGpt
 
 import java.awt.Color
 
@@ -463,13 +462,8 @@ class WmsCommand implements CaseInsensitiveBinder, Validateable
 
     if ( this.epsgAsInteger == 4326 )
     {
-      def gpt = new ossimGpt()
-      def mpd = gpt.metersPerDegree()
-
-      result = result *= mpd.x
-
-      gpt.delete()
-      mpd.delete()
+      Double mpd = 111319.490793273565941
+      result = result *= mpd
     }
 
     result

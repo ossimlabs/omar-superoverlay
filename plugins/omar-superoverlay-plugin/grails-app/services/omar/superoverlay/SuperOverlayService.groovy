@@ -9,7 +9,6 @@ import geoscript.workspace.Workspace
 import grails.transaction.Transactional
 import groovy.xml.StreamingMarkupBuilder
 import java.awt.image.BufferedImage
-import joms.oms.ossimGpt
 //import org.ossim.omar.core.Utility
 //import org.ossim.omar.ogc.WmsCommand
 import org.springframework.beans.factory.InitializingBean
@@ -577,13 +576,14 @@ class SuperOverlayService implements InitializingBean
 
   void afterPropertiesSet()
   {
-    def gpt = new ossimGpt()
-    def dpt = gpt.metersPerDegree()
-    metersPerDegree = dpt.y
-    dpt.delete()
-    gpt.delete()
-    dpt = null
-    gpt = null
+    //def gpt = new ossimGpt()
+    //def dpt = gpt.metersPerDegree()
+    // set WGS84 0,0
+    metersPerDegree = 111319.490793273565941 //dpt.y
+//    dpt.delete()
+//    gpt.delete()
+//    dpt = null
+//    gpt = null
     tileSize = grailsApplication.config.superOverlay?.tileSize
     lodValues = grailsApplication.config.superOverlay?.lodPixel
     tileSize = tileSize ?: [width: 256, height: 256]
