@@ -18,3 +18,18 @@ Ref: [omar-ossim-base](../../../omar-ossim-base/docs/install-guide/omar-ossim-ba
 
 ## JAR
 `http://artifacts.radiantbluecloud.com/artifactory/webapp/#/artifacts/browse/tree/General/omar-local/io/ossim/omar/apps/omar-superoverlay-app`
+
+## Configuration
+
+You can insert the [Common Config Settings](../../../omar-common/docs/install-guide/omar-common#common-config-settings) for any additional YAML configurations.
+
+```
+omar:
+  superOverlay:
+    wmsUrl: ${serverProtocol}://${serverName}/omar-wms/wms/getMap
+```
+
+* **superOverlay**
+ * **wmsUrl** This is the GetMap endpoint for the WMS Request.
+
+ 
