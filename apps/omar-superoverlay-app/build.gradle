@@ -6,8 +6,8 @@ buildscript {
        [
      "FROM ${lazyProperty('dockerNamespaceUrl')}${lazyProperty('baseImage')}:${lazyProperty('dockerAppTag')}",
      "MAINTAINER DigitalGlobe-RadiantBlue",
-     "ENV SPRING_CLOUD_CONFIG_ENABLED=true",
-     "ENV SPRING_CLOUD_DISCOVERY_ENABLED",
+     "ENV SPRING_CLOUD_CONFIG_ENABLED true",
+     "ENV SPRING_CLOUD_DISCOVERY_ENABLED true",
      "expose 8080",
      "RUN useradd -u 1001 -r -g 0 -d \$HOME -s /sbin/nologin \
                       -c 'Default Application User' omar &&\
