@@ -21,6 +21,7 @@ buildscript {
      'WORKDIR /usr/share/omar',
      "CMD java -server -Xms256m -Xmx1024m -Djava.awt.headless=true -Dspring.profiles.active=production -Djava.security.egd=file:/dev/./urandom -Dserver.contextPath=/omar-eureka-server -jar /usr/share/omar/${project.name}-${buildVersion}-${buildVersionTag}.jar"
        ]
+     }
   }
   if(System.env.OMAR_COMMON_PROPERTIES)
   {
