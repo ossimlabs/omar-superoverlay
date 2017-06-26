@@ -16,7 +16,7 @@ buildscript {
      'RUN chown -R 1001:0 /usr/share/omar',
      'RUN chown 1001:0 /usr/share/omar',
      'RUN chmod -R g+rw /usr/share/omar',
-     'find $HOME -type d -exec chmod g+x {} +',
+     'RUN find $HOME -type d -exec chmod g+x {} +',
      "USER 1001",
      'WORKDIR /usr/share/omar',
      "CMD java -server -Xms256m -Xmx1024m -Djava.awt.headless=true -Dspring.profiles.active=production -Djava.security.egd=file:/dev/./urandom -Dserver.contextPath=/omar-eureka-server -jar /usr/share/omar/${project.name}-${buildVersion}-${buildVersionTag}.jar"
