@@ -2,6 +2,25 @@ buildscript {
   ext {
     grailsVersion = project.grailsVersion
     baseImage = "omar-ossim-base"
+     dockerStatementsOverride = {
+       [
+     "FROM ${lazyProperty('dockerNamespaceUrl')}${lazyProperty('baseImage')}:${lazyProperty('dockerAppTag')}",
+     "MAINTAINER DigitalGlobe-RadiantBlue",
+     "ENV SPRING_CLOUD_CONFIG_ENABLED=true",
+     "ENV SPRING_CLOUD_DISCOVERY_ENABLED",
+     "expose 8080",
+     "RUN useradd -u 1001 -r -g 0 -d \$HOME -s /sbin/nologin \
+                      -c 'Default Application User' omar &&\
+                mkdir /usr/share/omar",
+     "COPY ${jarName} /usr/share/omar",
+     'RUN chown -R 1001:0 /usr/share/omar',
+     'RUN chown 1001:0 /usr/share/omar',
+     'RUN chmod -R g+rw /usr/share/omar',
+     'find $HOME -type d -exec chmod g+x {} +',
+     "USER 1001",
+     'WORKDIR /usr/share/omar',
+     "CMD java -server -Xms256m -Xmx1024m -Djava.awt.headless=true -Dspring.profiles.active=production -Djava.security.egd=file:/dev/./urandom -Dserver.contextPath=/omar-eureka-server -jar /usr/share/omar/${project.name}-${buildVersion}-${buildVersionTag}.jar"
+       ]
   }
   if(System.env.OMAR_COMMON_PROPERTIES)
   {
