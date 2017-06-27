@@ -21,7 +21,7 @@ Ref: [omar-base](../../../omar-base/docs/install-guide/omar-ossim-base/)
 
 ## Configuration
 
-You can insert the [Common Config Settings](../../../omar-common/docs/install-guide/omar-common#common-config-settings) for any additional YAML configurations.
+You can insert the [Common Config Settings](../../../omar-common/docs/install-guide/omar-common/#common-config-settings) for any additional YAML configurations.
 
 ```
 omar:
