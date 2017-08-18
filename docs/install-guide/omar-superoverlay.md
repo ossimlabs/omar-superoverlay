@@ -23,12 +23,6 @@ Ref: [omar-base](../../../omar-base/docs/install-guide/omar-base/)
 
 You can insert the [Common Config Settings](../../../omar-common/docs/install-guide/omar-common/#common-config-settings) for any additional YAML configurations.
 
-```
-omar:
-  superOverlay:
-    wmsUrl: ${serverProtocol}://${serverName}/omar-wms/wms/getMap
-```
-
 * **superOverlay**
  * **wmsUrl** This is the GetMap endpoint for the WMS Request.
 
