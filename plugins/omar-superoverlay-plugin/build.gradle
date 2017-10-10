@@ -46,12 +46,13 @@ repositories {
   maven { url "https://repo.grails.org/grails/core" }
 }
 
-// dependencyManagement {
-//   imports {
-//     mavenBom "org.grails:grails-bom:$grailsVersion"
-//   }
-//   applyMavenExclusions false
-// }
+dependencyManagement {
+  imports {
+    // mavenBom "org.grails:grails-bom:$grailsVersion"
+    mavenBom "org.springframework.cloud:spring-cloud-starter-parent:Dalston.SR4"    
+  }
+  applyMavenExclusions false
+}
 
 
 grails {
@@ -62,6 +63,8 @@ grails {
 }
 
 dependencies {
+  compile "org.springframework.cloud:spring-cloud-starter-zipkin"
+
   // if(System.env.O2_DEV_HOME)
   // {
   //   compile project(':omar-geoscript-plugin')
@@ -117,7 +120,7 @@ dependencies {
   testCompile "org.grails.plugins:geb"
   testCompile "org.grails:grails-web-testing-support"
   testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
-  testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"  
+  testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 }
 
 assets {
