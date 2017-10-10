@@ -1,10 +1,12 @@
 package omar.superoverlay
 
-import com.wordnik.swagger.annotations.Api
-import com.wordnik.swagger.annotations.ApiImplicitParam
-import com.wordnik.swagger.annotations.ApiImplicitParams
-import com.wordnik.swagger.annotations.ApiOperation
+// import com.wordnik.swagger.annotations.Api
+// import com.wordnik.swagger.annotations.ApiImplicitParam
+// import com.wordnik.swagger.annotations.ApiImplicitParams
+// import com.wordnik.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.InitializingBean
+
+import io.swagger.annotations.*
 
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
