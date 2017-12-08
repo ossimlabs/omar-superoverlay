@@ -63,7 +63,7 @@ grails {
 }
 
 dependencies {
-  compile "org.springframework.cloud:spring-cloud-starter-zipkin"
+  //compile "org.springframework.cloud:spring-cloud-starter-zipkin"
 
   // if(System.env.O2_DEV_HOME)
   // {
