@@ -31,7 +31,8 @@ class SuperOverlayController implements InitializingBean
   }
 
   @ApiOperation( value = "Create a KML SuperOverlay for viewing in GoogleEarth",
-      produces = 'application/vnd.google-earth.kmz'
+      produces = 'application/vnd.google-earth.kmz',
+      httpMethod="GET"
   )
   @ApiImplicitParams( [
       @ApiImplicitParam( name = 'id', value = 'id of the image (can be database id, image id, or index id)', paramType = 'path', dataType = 'string', required = true )
@@ -194,7 +195,8 @@ class SuperOverlayController implements InitializingBean
 
     @ApiOperation(
         produces = 'application/vnd.google-earth.kml',
-        value = "Get a KML with the most recent images in your BBOX."
+        value = "Get a KML with the most recent images in your BBOX.",
+        httpMethod="GET"
     )
     @ApiImplicitParams([
         @ApiImplicitParam(
