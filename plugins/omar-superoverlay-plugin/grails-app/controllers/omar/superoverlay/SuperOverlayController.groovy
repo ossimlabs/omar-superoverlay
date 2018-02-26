@@ -216,7 +216,7 @@ class SuperOverlayController implements InitializingBean
             value = 'Whether to include footprints in the results or not.'
         ),
         @ApiImplicitParam(
-            dataType = 'int',
+            dataType = 'integer',
             name = 'maxFeatures',
             paramType = 'query',
             required = false,
