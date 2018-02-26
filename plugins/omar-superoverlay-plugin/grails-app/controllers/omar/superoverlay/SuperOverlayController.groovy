@@ -13,7 +13,7 @@ import geoscript.filter.Filter
 import geoscript.workspace.Workspace
 
 
-@Api( value = "superoverlay",
+@Api( value = "/superoverlay",
     description = "SuperOverlay Support"
 )
 class SuperOverlayController implements InitializingBean
