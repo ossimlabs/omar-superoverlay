@@ -187,3 +187,10 @@ environments:
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
 logging:
   config: classpath:logback.groovy
+---
+# Define the http protocols that swagger will use
+swagger:
+  schemes:
+    - HTTPS
+    - HTTP
+
