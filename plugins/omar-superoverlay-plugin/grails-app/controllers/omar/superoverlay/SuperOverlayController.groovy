@@ -186,7 +186,7 @@ class SuperOverlayController implements InitializingBean
         def kmlString = superOverlayService.getLastImagesKml(params)
         def filename = "O2 Last ${params.max ?: 10} Images.kml".replace(' ', '_')
 
-        response.setHeader("Content-Disposition", "attachment; filename='${filename}''")
+        response.setHeader("Content-Disposition", "attachment; filename=${filename}")
 
         render (
             contentType: "application/vnd.google-earth.kml+xml",
