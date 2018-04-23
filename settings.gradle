@@ -1,3 +1,8 @@
+pluginRepositories {
+	maven { url "${ System.getenv('ARTIFACOTRY_URL') }/ossim-deps" }
+	gradlePluginPortal()
+}
+
 def final O2_DEV_HOME = System.getenv('O2_DEV_HOME')
 
 if ( O2_DEV_HOME ) {
@@ -7,7 +12,7 @@ if ( O2_DEV_HOME ) {
             'omar-geoscript-plugin',
             'omar-wms-plugin',
             'omar-core-plugin',
-            'omar-hibernate-spatial-plugin'      
+            'omar-hibernate-spatial-plugin'
 
    project(':omar-superoverlay-app').projectDir = "${O2_DEV_HOME}/omar-superoverlay/apps/omar-superoverlay-app" as File
    project(':omar-superoverlay-plugin').projectDir = "${O2_DEV_HOME}/omar-superoverlay/plugins/omar-superoverlay-plugin" as File
