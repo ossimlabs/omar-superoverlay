@@ -5,13 +5,8 @@ pluginManagement {
   }
 }
 
-def final O2_DEV_HOME = System.getenv('O2_DEV_HOME')
+include  'omar-superoverlay-app',
+         'omar-superoverlay-plugin'
 
-if ( O2_DEV_HOME ) {
-
-   include  'omar-superoverlay-app',
-            'omar-superoverlay-plugin'
-
-   project(':omar-superoverlay-app').projectDir = "${O2_DEV_HOME}/omar-superoverlay/apps/omar-superoverlay-app" as File
-   project(':omar-superoverlay-plugin').projectDir = "${O2_DEV_HOME}/omar-superoverlay/plugins/omar-superoverlay-plugin" as File
-}
+project(':omar-superoverlay-app').projectDir = "${rootProject.projectDir}/apps/omar-superoverlay-app" as File
+project(':omar-superoverlay-plugin').projectDir = "${rootProject.projectDir}/plugins/omar-superoverlay-plugin" as File
