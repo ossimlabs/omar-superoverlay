@@ -52,9 +52,21 @@ dependencyManagement {
   applyMavenExclusions false
 }
 
+if ( System.getenv('O2_INLINE_BUILD') ) {
+  grails {
+    plugins {
+      compile project(":omar-geoscript-plugin")
+      // compile project(":omar-wms-plugin")
+    }
+  }
+}
+
+
 dependencies {
-  compile "io.ossim.omar.plugins:omar-geoscript-plugin:+"
-  compile "io.ossim.omar.plugins:omar-wms-plugin:+"
+  if ( ! System.getenv('O2_INLINE_BUILD') ) {
+    compile "io.ossim.omar.plugins:omar-geoscript-plugin:+"
+    compile "io.ossim.omar.plugins:omar-wms-plugin:+"
+  }
 
   compile "org.springframework.boot:spring-boot-starter-logging"
   compile "org.springframework.boot:spring-boot-autoconfigure"
