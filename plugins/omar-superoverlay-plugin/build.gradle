@@ -53,6 +53,7 @@ dependencies {
 
   compile "io.swagger:swagger-annotations:1.5.15"
   compile "io.swagger:swagger-models:1.5.15"
+  compile "org.grails.plugins:actuator-ui:1.1"
   compile group: 'com.vividsolutions', name: 'jts', version: '1.13'
   compile "joda-time:joda-time:2.9.9"
   compile( "org.geoscript:geoscript-groovy:1.10.0" ) {
