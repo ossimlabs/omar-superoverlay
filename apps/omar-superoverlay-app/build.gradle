@@ -65,7 +65,7 @@ grails {
 }
 
 dependencies {
-  compile "de.codecentric:spring-boot-admin-starter-client:${springBootAdminStarterClientV}"
+  compile "de.codecentric:spring-boot-admin-starter-client:1.5.7"
 
   compile "org.springframework.cloud:spring-cloud-starter-config"
   compile "org.springframework.cloud:spring-cloud-starter-eureka"
@@ -95,10 +95,10 @@ dependencies {
   runtime "org.glassfish.web:el-impl:${elImplV}"
   runtime "com.h2database:h2"
   runtime "org.apache.tomcat:tomcat-jdbc"
-  runtime "com.bertramlabs.plugins:asset-pipeline-gradle:${assetPipelineGrailsV}"
+  runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.14.10"
   testCompile "org.grails:grails-gorm-testing-support"
   testCompile "org.grails.plugins:geb"
-  testCompile "org.grails:grails-web-testing-support:3.2.7"
+  testCompile "org.grails:grails-web-testing-support"
   testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:${seleniumHtmlUnitDriverV}"
   testRuntime "net.sourceforge.htmlunit:htmlunit:${htmlUnitV}"
 }
