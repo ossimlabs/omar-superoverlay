@@ -75,7 +75,7 @@ dependencies {
     exclude module: "xml-apis"
     exclude module: "commons-beanutils"
     exclude module: "gt-jdbc-spatialite"
-  
+  }
 
   compile "org.springframework.boot:spring-boot-starter-logging"
   compile "org.springframework.boot:spring-boot-autoconfigure"
