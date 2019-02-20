@@ -46,11 +46,23 @@ dependencyManagement {
   applyMavenExclusions false
 }
 
-dependencies {
-  compile "io.ossim.omar.plugins:omar-core-plugin:${latestGradleIdentifier}"
-  compile "io.ossim.omar.plugins:omar-geoscript-plugin:${latestGradleIdentifier}"
-  compile "io.ossim.omar.plugins:omar-wms-plugin:${latestGradleIdentifier}"
+if ( System.getenv('O2_INLINE_BUILD') ) {
+  grails {
+    plugins {
+      compile project(":omar-geoscript-plugin")
+      // compile project(":omar-wms-plugin")
+    }
+  }
+}
 
+
+dependencies {
+  if ( ! System.getenv('O2_INLINE_BUILD') ) {
+    compile "io.ossim.omar.plugins:omar-core-plugin:${latestGradleIdentifier}"
+    compile "io.ossim.omar.plugins:omar-geoscript-plugin:${latestGradleIdentifier}"
+    compile "io.ossim.omar.plugins:omar-wms-plugin:${latestGradleIdentifier}"
+  }
+  
   compile "io.swagger:swagger-annotations:1.5.15"
   compile "io.swagger:swagger-models:1.5.15"
   compile "org.grails.plugins:actuator-ui:1.1"
@@ -63,7 +75,7 @@ dependencies {
     exclude module: "xml-apis"
     exclude module: "commons-beanutils"
     exclude module: "gt-jdbc-spatialite"
-  }
+  
 
   compile "org.springframework.boot:spring-boot-starter-logging"
   compile "org.springframework.boot:spring-boot-autoconfigure"

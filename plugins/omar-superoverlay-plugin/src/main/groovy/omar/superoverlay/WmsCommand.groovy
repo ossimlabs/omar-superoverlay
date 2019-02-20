@@ -39,8 +39,6 @@ class WmsCommand implements CaseInsensitiveBinder, Validateable
   String exceptions
 
   // OMS Extensions
-  String stretch_mode = "linear_auto_min_max"
-  String stretch_mode_region = "global"
   String sharpen_mode
   String sharpen_width
   String sharpen_sigma
@@ -281,29 +279,6 @@ class WmsCommand implements CaseInsensitiveBinder, Validateable
           }
           message
         } )
-    stretch_mode( nullable: true,
-        validator: { val, obj ->
-          def message = true
-          if ( val )
-          {
-          }
-          message
-        } )
-    stretch_mode_region( nullable: true,
-        validator: { val, obj ->
-          def message = true
-          if ( obj.request?.toLowerCase() == "getmap" )
-          {
-            if ( val )
-            {
-              if ( !( val.toLowerCase() in ["global", "viewport"] ) )
-              {
-                message = "STRETCH_MODE_REGION parameter invalid.  Values can be global or viewport"
-              }
-            }
-          }
-          message
-        } )
     rotate( nullable: true,
         validator: { val, obj ->
           def message = true
@@ -362,8 +337,7 @@ class WmsCommand implements CaseInsensitiveBinder, Validateable
   def toMap()
   {
     return [bbox: bbox, width: width, height: height, format: format, layers: layers, srs: srs, service: service,
-        version: version, request: request, transparent: transparent, bgcolor: bgcolor, styles: styles,
-        stretch_mode: stretch_mode, stretch_mode_region: stretch_mode_region, sharpen_mode: sharpen_mode,
+        version: version, request: request, transparent: transparent, bgcolor: bgcolor, styles: styles, sharpen_mode: sharpen_mode,
         sharpen_width: sharpen_width, sharpen_sigma: sharpen_sigma, rotate: rotate,
         time: time, null_flip: null_flip, bands: bands, exceptions: exceptions, filter: filter,
         quicklook: quicklook, brightness: brightness, contrast: contrast, interpolation: interpolation].sort { it.key }
@@ -371,7 +345,7 @@ class WmsCommand implements CaseInsensitiveBinder, Validateable
 
   def customParametersToMap()
   {
-    [bands: bands, stretch_mode: stretch_mode, stretch_mode_region: stretch_mode_region, sharpen_mode: sharpen_mode,
+    [bands: bands, sharpen_mode: sharpen_mode,
         sharpen_width: sharpen_width, sharpen_sigma: sharpen_sigma, rotate: rotate,
         time: time, null_flip: null_flip, exceptions: exceptions, filter: filter, quicklook: quicklook,
         brightness: brightness, contrast: contrast, interpolation: interpolation].sort() { it.key }

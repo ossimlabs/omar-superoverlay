@@ -9,3 +9,19 @@ include  'omar-superoverlay-app',
 
 project(':omar-superoverlay-app').projectDir = "${rootProject.projectDir}/apps/omar-superoverlay-app" as File
 project(':omar-superoverlay-plugin').projectDir = "${rootProject.projectDir}/plugins/omar-superoverlay-plugin" as File
+
+if ( System.getenv('O2_INLINE_BUILD') ) {
+  def modules = [
+      "omar-core",
+      "omar-geoscript",
+      "omar-hibernate-spatial",
+      "omar-oms"
+  ]
+
+  modules.each { module ->
+    include "${module}-plugin"
+
+    project(":${module}-plugin").projectDir = "${rootProject.projectDir}/../${module}/plugins/${module}-plugin" as File
+  }
+}
+
