@@ -108,6 +108,8 @@ dependencies {
   testRuntime "net.sourceforge.htmlunit:htmlunit:${htmlUnitV}"
 }
 
+bootRepackage.enabled = false
+
 assets {
   packagePlugin = true
 }
