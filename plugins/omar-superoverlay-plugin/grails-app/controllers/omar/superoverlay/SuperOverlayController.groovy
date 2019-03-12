@@ -118,7 +118,7 @@ class SuperOverlayController implements InitializingBean
             try
             {
               def kmlString = superOverlayService.createRootKml( rasterEntry, params )
-              response.setHeader( "Content-disposition", "attachment; filename=doc.kml" )
+              response.setHeader( "Content-disposition", "attachment; filename=omar-export-${params.id}.kml" )
               render( contentType: "application/vnd.google-earth.kml+xml",
                   text: kmlString,
                   encoding: "UTF-8" )
@@ -163,7 +163,7 @@ class SuperOverlayController implements InitializingBean
             try
             {
               def kmlString = superOverlayService.createRootKml( rasterEntry, params )
-              response.setHeader( "Content-disposition", "attachment; filename=doc.kml" )
+              response.setHeader( "Content-disposition", "attachment; filename=omar-export-${params.id}.kml" )
               render( contentType: "application/vnd.google-earth.kml+xml",
                   text: kmlString,
                   encoding: "UTF-8" )
