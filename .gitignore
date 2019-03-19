@@ -19,3 +19,4 @@ apps/omar-app/.asscache
 .asscache
 *.log
 out
+docker/*.jar
