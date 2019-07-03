@@ -28,8 +28,8 @@ omar:
 
 
 # Set the context path for the application.
-#server:
-#  contextPath: /omar-superoverlay
+server:
+  contextPath: /omar-superoverlay
 
 ---
 grails:
