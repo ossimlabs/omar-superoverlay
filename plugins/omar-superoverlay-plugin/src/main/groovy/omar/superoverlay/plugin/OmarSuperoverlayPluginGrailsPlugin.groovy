@@ -1,21 +1,18 @@
-package omar.superoverlay
+package omar.superoverlay.plugin
 
 import grails.plugins.*
 
-import groovy.util.logging.Slf4j
-
-@Slf4j
-class OmarSuperoverlayGrailsPlugin extends Plugin {
+class OmarSuperoverlayPluginGrailsPlugin extends Plugin {
 
     // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "3.1.10 > *"
+    def grailsVersion = "4.0.0 > *"
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
         "grails-app/views/error.gsp"
     ]
 
     // TODO Fill in these fields
-    def title = "Omar Superoverlay" // Headline display name of the plugin
+    def title = "Omar Superoverlay Plugin" // Headline display name of the plugin
     def author = "Your name"
     def authorEmail = ""
     def description = '''\
@@ -24,7 +21,7 @@ Brief summary/description of the plugin.
     def profiles = ['web']
 
     // URL to the plugin's documentation
-    def documentation = "http://grails.org/plugin/omar-superoverlay"
+    def documentation = "http://grails.org/plugin/omar-superoverlay-plugin"
 
     // Extra (optional) plugin metadata
 
@@ -43,18 +40,7 @@ Brief summary/description of the plugin.
     // Online location of the plugin's browseable source code.
 //    def scm = [ url: "http://svn.codehaus.org/grails-plugins/" ]
 
-    Closure doWithSpring() { 
-        log.trace("doWithSpring(): Entered.............")
-
-        //println OmarSecurityUtils.application.config.grails.plugin.springsecurity
-        OmarSuperOverlayReflectionUtils.application = OmarSuperOverlayUtils.application = grailsApplication
-        OmarSuperOverlayUtils.resetSuperOverlayConfig()
-        // force reload by getting the config object
-        OmarSuperOverlayUtils.superOverlayConfig
-
-        log.trace("doWithSpring(): Leaving.............")
-
-        {->
+    Closure doWithSpring() { {->
             // TODO Implement runtime spring config (optional)
         }
     }
