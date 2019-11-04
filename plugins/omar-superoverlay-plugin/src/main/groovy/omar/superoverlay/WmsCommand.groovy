@@ -1,6 +1,6 @@
 package omar.superoverlay
 
-import com.vividsolutions.jts.geom.Geometry
+import org.locationtech.jts.geom.Geometry
 import geoscript.geom.Bounds
 import geoscript.proj.Projection
 import grails.validation.Validateable

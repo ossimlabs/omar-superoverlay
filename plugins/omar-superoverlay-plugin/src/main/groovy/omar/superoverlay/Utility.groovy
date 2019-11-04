@@ -316,7 +316,7 @@ class Utility implements ApplicationContextAware
           defaultConstraint = "like"
           break
 
-        case com.vividsolutions.jts.geom.Geometry.class:
+        case org.locationtech.jts.geom.Geometry.class:
           domainType = "Geometry"
           xmlType = "gml:PolygonPropertyType"
           break
