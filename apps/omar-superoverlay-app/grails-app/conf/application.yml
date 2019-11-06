@@ -155,7 +155,7 @@ management:
   endpoint:
     env:
       enabled: true
-      sensitive: fasle
+      sensitive: false
     health:
       enabled: true
     
@@ -186,16 +186,16 @@ eureka:
 ---
 configMsg: "Served by omar-config-server for omar-superoverlay-app"
 
-environments:
-  production:
-    dataSource:
-      pooled: true
-      jmxExport: true
-      driverClassName: org.postgresql.Driver
-      dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
-      url: jdbc:postgres://localhost:5432/omar_db
-      username: postgres
-      password: password
+# environments:
+#   production:
+#     dataSource:
+#       pooled: true
+#       jmxExport: true
+#       driverClassName: org.postgresql.Driver
+#       dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
+#       url: jdbc:postgres://localhost:5432/omar_db
+#       username: postgres
+#       password: password
 
 omar:
   o2:
