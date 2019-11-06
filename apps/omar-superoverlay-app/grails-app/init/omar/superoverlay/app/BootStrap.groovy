@@ -1,4 +1,4 @@
-package superoverlay.app
+package omar.superoverlay.app
 
 class BootStrap {
 

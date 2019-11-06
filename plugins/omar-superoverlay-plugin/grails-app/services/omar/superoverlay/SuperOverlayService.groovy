@@ -1,12 +1,12 @@
 package omar.superoverlay
 
 
-import com.vividsolutions.jts.geom.Coordinate
-import com.vividsolutions.jts.geom.GeometryFactory
-import com.vividsolutions.jts.geom.PrecisionModel
+import org.locationtech.jts.geom.Coordinate
+import org.locationtech.jts.geom.GeometryFactory
+import org.locationtech.jts.geom.PrecisionModel
 import geoscript.geom.*
 import geoscript.workspace.Workspace
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import groovy.xml.StreamingMarkupBuilder
 import java.awt.image.BufferedImage
 //import org.ossim.omar.core.Utility
