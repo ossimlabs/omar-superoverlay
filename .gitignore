@@ -11,3 +11,9 @@ out/
 .settings
 .classpath
 prodDb.mv.db
+docker/*.jar
+apps/omar-superoverlay-app/bin
+plugins/omar-superoverlay-plugin/bin
+packaged-chart
+*.lock
+charts/*.tgz
