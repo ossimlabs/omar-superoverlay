@@ -174,11 +174,7 @@ podTemplate(
                 if (BRANCH_NAME == 'master'){
                     //insert future instructions here
                 }
-                else if (BRANCH_NAME == 'ContinuousDeployment') {
-                    sh "aws eks --region us-east-1 update-kubeconfig --name gsp-dev-v2 --alias dev"
-                    sh "kubectl config set-context dev --namespace=omar-dev"
-                    sh "kubectl rollout restart deployment/omar-superoverlay"   
-                }
+               
                 else if (BRANCH_NAME == 'dev') {
                     sh "aws eks --region us-east-1 update-kubeconfig --name gsp-dev-v2 --alias dev"
                     sh "kubectl config set-context dev --namespace=omar-dev"
