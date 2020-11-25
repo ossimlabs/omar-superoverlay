@@ -102,6 +102,20 @@ podTemplate(
       DOCKER_IMAGE_PATH = "${DOCKER_REGISTRY_PRIVATE_UPLOAD_URL}/omar-superoverlay"
     }
 
+    stage('SonarQube Analysis') {
+                nodejs(nodeJSInstallationName: "${NODEJS_VERSION}") {
+                    def scannerHome = tool "${SONARQUBE_SCANNER_VERSION}"
+
+                    withSonarQubeEnv('sonarqube'){
+                        sh """
+                            ${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=omar-superoverlay \
+                            -Dsonar.login=${SONARQUBE_TOKEN}
+                        """
+                    }
+                }
+            }
+
     stage('Build') {
       container('builder') {
         sh """
