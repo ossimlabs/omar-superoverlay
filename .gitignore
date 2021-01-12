@@ -17,3 +17,6 @@ plugins/omar-superoverlay-plugin/bin
 packaged-chart
 *.lock
 charts/*.tgz
+node_modules
+package.json
+package-lock.json
