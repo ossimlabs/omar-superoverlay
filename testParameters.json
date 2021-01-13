@@ -30,16 +30,6 @@
         "footprints": "on",
         "maxFeatures": "10"
       }
-    },
-    "badKmlQuery": {
-      "method": "get",
-      "endpoint": "/superOverlay/kmlQuery",
-      "in": "query",
-      "expected": "bad",
-      "parameters": {
-        "footprints": "off",
-        "maxFeatures": "-2"
-      }
     }
   }
 }

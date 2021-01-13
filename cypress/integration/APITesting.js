@@ -42,4 +42,10 @@ describe('Automated tests for the omar-oms API endpoints', () => {
             })
         }
     })
+
+    it(`Should test the createKml call`, () => {
+        cy.request("get", "/superOverlay/createKml".then((response) => {
+            expect(response.status).to.eq(200)
+        }))
+    })
 })
