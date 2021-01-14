@@ -16,13 +16,13 @@ describe('Automated tests for the omar-oms API endpoints', () => {
                 request = request + parameter + "=" + innerJson.parameters[parameter] + "&";
             })
             request = request.substring(0, request.length - 1);
-            it(`Should test 200 code for ${test} test values`, () => {
+            it(`Should test 200 code for ${endpoint} test values`, () => {
                 cy.request(method, endpoint + request)
                     .then((response) => {
                         expect(response.status).to.eq(200)
                     })
             })
-            it(`Should test response header for ${test}`, () => {
+            it(`Should test response header for ${request}`, () => {
                 cy.request(method, endpoint + request)
                     .then((response) => {
                         expect(response).to.have.property("headers")
@@ -41,11 +41,5 @@ describe('Automated tests for the omar-oms API endpoints', () => {
                 })
             })
         }
-    })
-
-    it(`Should test the createKml call`, () => {
-        cy.request("get", "/superOverlay/createKml".then((response) => {
-            expect(response.status).to.eq(200)
-        }))
     })
 })
