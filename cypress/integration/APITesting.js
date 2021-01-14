@@ -2,7 +2,7 @@ let json = require('../../testParameters.json');
 let tests = Object.keys(json.tests);
 let innerJson, method, endpoint, query, good, parameters, request, keys;
 
-describe('Automated tests for the omar-oms API endpoints', () => {
+describe('Automated tests for the omar-superoverlay API endpoints', () => {
     tests.forEach((test) => {
         innerJson = json.tests[test];
         method = innerJson["method"];
