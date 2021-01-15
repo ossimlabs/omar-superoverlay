@@ -16,13 +16,13 @@ describe('Automated tests for the omar-superoverlay API endpoints', () => {
                 request = request + parameter + "=" + innerJson.parameters[parameter] + "&";
             })
             request = request.substring(0, request.length - 1);
-            it(`Should test 200 code for ${endpoint} test values`, () => {
+            it(`Should test 200 code for ${test} test values`, () => {
                 cy.request(method, endpoint + request)
                     .then((response) => {
                         expect(response.status).to.eq(200)
                     })
             })
-            it(`Should test response header for ${request}`, () => {
+            it(`Should test response header for ${test}`, () => {
                 cy.request(method, endpoint + request)
                     .then((response) => {
                         expect(response).to.have.property("headers")
@@ -35,7 +35,7 @@ describe('Automated tests for the omar-superoverlay API endpoints', () => {
                 request = request + parameter + "=" + innerJson.parameters[parameter] + "&";
             })
             request = request.substring(0, request.length - 1);
-            it(`Should test not 200 code for ${test} test values`, () => {
+            it(`Should test for a not 200 code for ${test} test values`, () => {
                 cy.request(method, endpoint + request).then((response) => {
                     expect(response.status).to.not.eq(200)
                 })
