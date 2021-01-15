@@ -31,6 +31,17 @@
         "maxFeatures": "10"
       }
     },
+    "badKmlQuery": {
+      "method": "get",
+      "endpoint": "/superOverlay/kmlQuery",
+      "in": "query",
+      "expected": "bad",
+      "parameters": {
+        "BBOX": "0,0,10,10",
+        "footprints": "on",
+        "maxFeatures": "-5"
+      }
+    },
     "createKml": {
       "method": "get",
       "endpoint": "/superOverlay/createKml",
