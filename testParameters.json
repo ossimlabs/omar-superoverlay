@@ -41,14 +41,6 @@
         "footprints": "on",
         "maxFeatures": "-5"
       }
-    },
-    "createKml": {
-      "method": "get",
-      "endpoint": "/superOverlay/createKml",
-      "in": "query",
-      "expected": "good",
-      "parameters": {
-      }
     }
   }
 }
