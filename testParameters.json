@@ -5,9 +5,9 @@
       "name": {
         "method": ["get", "post", "delete", "etc..."],
         "endpoint": "/controller/endpoint",
-        "in": ["query", "body"],
+        "in": ["query", "body", "path"],
         "expected": ["good", "bad"],
-        "parameters": [{"parameterName1": "value1", "parameterName2": "value2"}, { "body": {} }]
+        "parameters": [{"parameterName1": "value1", "parameterName2": "value2"}, { "body": {} }, { "id": "idValue"}]
       }
     }
   },
@@ -40,6 +40,15 @@
         "BBOX": "0,0,10,10",
         "footprints": "on",
         "maxFeatures": "-5"
+      }
+    },
+    "createKml": {
+      "method": "get",
+      "endpoint": "/superOverlay/createKml",
+      "in": "path",
+      "expected": "good",
+      "parameters": {
+        "id": "test"
       }
     }
   }
