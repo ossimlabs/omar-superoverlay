@@ -561,9 +561,8 @@ class SuperOverlayService implements InitializingBean
     }
 
   /**
-   *
-   * @param params
-   * @return
+   * @param query params with maxFeatures
+   * @return the params
    */
   def validateKmlQueryParams(params) {
     def maxFeatures = params.maxFeatures ?: configDefaultFeatures
