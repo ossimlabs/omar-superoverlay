@@ -222,7 +222,9 @@ class SuperOverlayController implements InitializingBean
             name = 'maxFeatures',
             paramType = 'query',
             required = false,
-            value = 'The maximum number, [0,100], of images to be returned.'
+            defaultValue = "10",
+            allowableValues = "range [0, 100]",
+            value = "The maximum number of images to be returned. Requests greater than the allowable range are limited to the upper range limit."
         )
     ])
     def kmlQuery() {
