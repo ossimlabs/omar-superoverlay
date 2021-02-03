@@ -1,44 +1,52 @@
 package omar.superoverlay
 
-import grails.testing.spring.AutowiredTest
-import grails.testing.web.services.ServiceUnitTest
-import groovy.json.JsonSlurper
-import omar.superoverlay.SuperOverlayController
+import grails.testing.gorm.DataTest
+import grails.testing.services.ServiceUnitTest
+
 import spock.lang.Specification
 
-class SuperOverlayControllerSpec extends Specification implements AutowiredTest, ServiceUnitTest<SuperOverlayService> {
+class SuperOverlayServiceSpec extends Specification implements  DataTest, ServiceUnitTest<SuperOverlayService> {
+    void setupSpec() {
+        // Leaving dead code here for possible future tests.
+        //        LayerInfo layerInfo = new LayerInfo()
+        //        WorkspaceInfo workspaceInfo = new WorkspaceInfo()
+        //        def workspaceParams = ['foo': 'bar']
+        //        StringBuffer kmlFeatures = new StringBuffer()
+        //        workspaceInfo.workspaceParams = workspaceParams
+        //        layerInfo.workspaceInfo = workspaceInfo
+        //        service.geoscriptService = Stub(GeoscriptService) {
+        //            findLayerInfo(_) >> layerInfo
+        //            parseOptions(_) >> Object
+        //            getWorkspace(_) >> workspaceInfo
+        //        }
+        //        service.kmlService = Stub(KmlService) {
+        //            getFeaturesKml(_) >> kmlFeatures
+        //        }
+    }
 
-//    Closure doWithSpring() {
-//        { ->
-//            superOverlayService SuperOverlayService
-//        }
-//    }
-//
-//    SuperOverlayService superOverlayService
-//    JsonSlurper jsonSlurper
-//
-//    void setup() {
-//        jsonSlurper = new JsonSlurper()
-//    }
-
-    void 'test kmlQuery maxFeatures exceeds upper bounds'() {
+    void 'test validateKmlQueryParams maxFeatures range [0, 100] -- maxFeatures 101'() {
         when:
         // kmlQuery?footprints=on&maxFeatures=101
-        params.maxFeatures = 101
-        params.footprints = "on"
-        controller.kmlQuery()
+        def params = [maxFeatures: 101, footprints: "on"]
 
         then:
-        status != 200
+        service.validateKmlQueryParams(params) == [maxFeatures: 100, footprints: "on"]
     }
-    void 'test kmlQuery maxFeatures exceeds lower bounds'() {
+    void 'test validateKmlQueryParams maxFeatures range [0, 100] -- maxFeatures -1'() {
         when:
-        // kmlQuery?footprints=on&maxFeatures=0
-        params.maxFeatures = -1
-        params.footprints = "on"
-        controller.kmlQuery()
+        // kmlQuery?footprints=on&maxFeatures=-1
+        def params = [maxFeatures: -1, footprints: "on"]
 
         then:
-        status != 200
+        service.validateKmlQueryParams(params) == [maxFeatures: 0, footprints: "on"]
+    }
+
+    void 'test validateKmlQueryParams maxFeatures range [0, 100] -- maxFeatures 1'() {
+        when:
+        // kmlQuery?footprints=on&maxFeatures=1
+        def params = [maxFeatures: 1, footprints: "on"]
+
+        then:
+        service.validateKmlQueryParams(params) == [maxFeatures: 1, footprints: "on"]
     }
 }
