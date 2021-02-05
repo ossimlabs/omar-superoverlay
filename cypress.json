@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://omar.ossim.io/omar-superoverlay",
+  "baseUrl": "https://omar-dev.ossim.io/omar-superoverlay",
   "reporter": "junit",
   "video": false,
   "reporterOptions": {
