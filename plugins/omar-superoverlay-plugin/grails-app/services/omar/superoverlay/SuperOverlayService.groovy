@@ -522,17 +522,8 @@ class SuperOverlayService implements InitializingBean
         return kmlBuilder.bind( kmlNode ).toString()
     }
 
-    def kmlQuery(params) {
-        // make sure the BBOX is valid
-        def bbox = params.BBOX?.split(",").collect({ it as Double })
-        if ( bbox ) {
-            if ( bbox[0] < -180 ) { bbox[0] = -180 }
-            if ( bbox[1] < -90 ) { bbox[1] = -90 }
-            if ( bbox[2] > 180 ) { bbox[2] = 180 }
-            if ( bbox[3] > 90 ) { bbox[3] = 90 }
-        }
-        else { bbox = [-180, -90, 180, 90] }
-
+    def kmlQuery(kmlQueryCmd) {
+        def bbox = kmlQueryCmd.getBBOX()
         def polygon = new Bounds(bbox[0], bbox[1], bbox[2], bbox[3]).createRectangle(4, 0)
         def filter = "INTERSECTS(ground_geom,${polygon})"
 

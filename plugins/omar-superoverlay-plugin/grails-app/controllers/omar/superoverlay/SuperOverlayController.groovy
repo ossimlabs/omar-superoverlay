@@ -227,8 +227,8 @@ class SuperOverlayController implements InitializingBean
             value = "The maximum number of images to be returned. Requests greater than the allowable range are limited to the upper range limit."
         )
     ])
-    def kmlQuery() {
-        def kmlString = superOverlayService.kmlQuery(params)
+    def kmlQuery(KmlQueryCommand cmd) {
+        def kmlString = superOverlayService.kmlQuery(cmd)
 
         render(
             contentType: "application/vnd.google-earth.kml+xml",
