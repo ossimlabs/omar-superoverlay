@@ -3,6 +3,7 @@ package omar.superoverlay
 import org.springframework.beans.factory.InitializingBean
 
 import io.swagger.annotations.*
+import org.springframework.http.HttpStatus
 
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
@@ -228,8 +229,12 @@ class SuperOverlayController implements InitializingBean
         )
     ])
     def kmlQuery(KmlQueryCommand cmd) {
+        cmd.validate()
+        if (cmd.errors.hasErrors()) {
+          render status: HttpStatus.UNPROCESSABLE_ENTITY
+          return
+        }
         def kmlString = superOverlayService.kmlQuery(cmd)
-
         render(
             contentType: "application/vnd.google-earth.kml+xml",
             encoding: "UTF-8",
