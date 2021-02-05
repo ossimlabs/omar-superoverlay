@@ -112,7 +112,7 @@ podTemplate(
     stage('Build') {
       container('builder') {
         sh """
-        ./gradlew assemble \
+        ./gradlew assemble test \
             -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
         ./gradlew copyJarToDockerDir \
             -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}

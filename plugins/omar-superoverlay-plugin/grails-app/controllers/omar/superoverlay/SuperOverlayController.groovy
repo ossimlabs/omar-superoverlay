@@ -3,6 +3,7 @@ package omar.superoverlay
 import org.springframework.beans.factory.InitializingBean
 
 import io.swagger.annotations.*
+import org.springframework.http.HttpStatus
 
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
@@ -222,12 +223,18 @@ class SuperOverlayController implements InitializingBean
             name = 'maxFeatures',
             paramType = 'query',
             required = false,
-            value = 'The maximum number, [0,100], of images to be returned.'
+            defaultValue = "10",
+            allowableValues = "range [0, 100]",
+            value = "The maximum number of images to be returned. Requests greater than the allowable range are limited to the upper range limit."
         )
     ])
-    def kmlQuery() {
-        def kmlString = superOverlayService.kmlQuery(params)
-
+    def kmlQuery(KmlQueryCommand cmd) {
+        cmd.validate()
+        if (cmd.errors.hasErrors()) {
+          render status: HttpStatus.UNPROCESSABLE_ENTITY
+          return
+        }
+        def kmlString = superOverlayService.kmlQuery(cmd)
         render(
             contentType: "application/vnd.google-earth.kml+xml",
             encoding: "UTF-8",

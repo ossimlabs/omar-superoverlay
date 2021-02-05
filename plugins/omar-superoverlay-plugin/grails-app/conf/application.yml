@@ -90,3 +90,9 @@ management:
     endpoints:
         jmx:
             unique-names: true
+
+superoverlay:
+    service:
+        default-features: 10
+        max-features: 100
+        min-features: 0
