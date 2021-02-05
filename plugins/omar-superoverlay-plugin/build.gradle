@@ -8,7 +8,7 @@ if ( System.getenv('O2_INLINE_BUILD') ) {
     }
 }
 dependencies {
-    implementation 'org.spockframework:spock-core'
+    testCompile 'org.spockframework:spock-core'
 
     //compile project( ":${ rootProject.name }-lib" )
     if ( ! System.getenv('O2_INLINE_BUILD') ) {
