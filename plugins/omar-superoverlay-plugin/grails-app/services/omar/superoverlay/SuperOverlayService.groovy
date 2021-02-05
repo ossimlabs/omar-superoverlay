@@ -551,26 +551,6 @@ class SuperOverlayService implements InitializingBean
         return kml
     }
 
-  /**
-   * @param query params with maxFeatures
-   * @return the params
-   */
-  def validateKmlQueryParams(params) {
-    def maxFeatures = params.maxFeatures ?: configDefaultFeatures
-    if (!maxFeatures.toString().isNumber()) {
-      maxFeatures = configMaxFeatures
-    } else {
-      maxFeatures = maxFeatures as Integer
-    }
-    if (maxFeatures > configMaxFeatures) {
-      maxFeatures = configMaxFeatures
-    } else if (maxFeatures < configMinFeatures) {
-      maxFeatures = configMinFeatures
-    }
-    params.maxFeatures = maxFeatures
-    params
-  }
-
   def tileBound(def params, def fullResBbox)
   {
     tileBound( params.level ? params.level as Integer : 0,
