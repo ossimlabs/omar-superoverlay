@@ -9,6 +9,7 @@ import spock.lang.Specification
 import java.net.http.HttpResponse
 
 class SuperOverlayControllerSpec extends Specification implements ControllerUnitTest<SuperOverlayController>{
+
     void 'KmlQueryCommand default maxFeatures, default footprints, default bbox'() {
         when:
         def cmd = new KmlQueryCommand(footprints: '')
@@ -97,4 +98,14 @@ class SuperOverlayControllerSpec extends Specification implements ControllerUnit
         then:
         status == HttpStatus.OK.value()
     }
+
+    void 'kmlQuery status UNPROCESSABLE_ENTITY (422) for maxFeatures < 0'() {
+        when:
+        params.maxFeatures = "-1"
+        controller.kmlQuery()
+
+        then:
+        status == HttpStatus.UNPROCESSABLE_ENTITY.value()
+    }
+
 }

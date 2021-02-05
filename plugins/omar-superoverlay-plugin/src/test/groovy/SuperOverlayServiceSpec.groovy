@@ -33,7 +33,7 @@ class SuperOverlayServiceSpec extends Specification implements  DataTest, Servic
         then:
         service.validateKmlQueryParams(params) == [maxFeatures: 100, footprints: "on"]
     }
-    
+
     @Ignore
     void 'test validateKmlQueryParams maxFeatures range [0, 100] -- maxFeatures -1'() {
         when:

@@ -22,10 +22,12 @@ class KmlQueryCommand implements Validateable {
     Integer configMinFeatures
 
     static constraints = {
-        maxFeatures(nullable: false, validator: { val, obj -> obj.validateMaxFeatures(val) })
         footprints blank: false, nullable: true
+        maxFeatures(nullable: false, validator: { val, obj, errors ->
+            if (!obj.validateMaxFeatures(val)) { errors.rejectValue('maxFeatures', 'invalid range') }
+        })
         bbox(blank: false, nullable: true, validator: { val, obj, errors ->
-            if (!obj.validateBbox(val)) errors.rejectValue('bbox', 'invalid format')
+            if (!obj.validateBbox(val)) { errors.rejectValue('bbox', 'invalid format') }
         })
     }
 
@@ -35,9 +37,12 @@ class KmlQueryCommand implements Validateable {
      *
      * @param maxFeatures param
      */
-    void validateMaxFeatures(val) {
-        if (val < configMinFeatures) maxFeatures = configMinFeatures
-        else if (val > configMaxFeatures) maxFeatures = configMaxFeatures
+    boolean validateMaxFeatures(val) {
+        if (val < configMinFeatures)
+            return false
+        if (val > configMaxFeatures)
+            maxFeatures = configMaxFeatures
+        return true
     }
 
     /**
