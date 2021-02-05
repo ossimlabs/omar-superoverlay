@@ -2,7 +2,7 @@ package omar.superoverlay
 
 import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
-
+import spock.lang.Ignore
 import spock.lang.Specification
 
 class SuperOverlayServiceSpec extends Specification implements  DataTest, ServiceUnitTest<SuperOverlayService> {
@@ -24,6 +24,7 @@ class SuperOverlayServiceSpec extends Specification implements  DataTest, Servic
         //        }
     }
 
+    @Ignore
     void 'test validateKmlQueryParams maxFeatures range [0, 100] -- maxFeatures 101'() {
         when:
         // kmlQuery?footprints=on&maxFeatures=101
@@ -32,6 +33,8 @@ class SuperOverlayServiceSpec extends Specification implements  DataTest, Servic
         then:
         service.validateKmlQueryParams(params) == [maxFeatures: 100, footprints: "on"]
     }
+    
+    @Ignore
     void 'test validateKmlQueryParams maxFeatures range [0, 100] -- maxFeatures -1'() {
         when:
         // kmlQuery?footprints=on&maxFeatures=-1
@@ -41,6 +44,7 @@ class SuperOverlayServiceSpec extends Specification implements  DataTest, Servic
         service.validateKmlQueryParams(params) == [maxFeatures: 0, footprints: "on"]
     }
 
+    @Ignore
     void 'test validateKmlQueryParams maxFeatures range [0, 100] -- maxFeatures 1'() {
         when:
         // kmlQuery?footprints=on&maxFeatures=1

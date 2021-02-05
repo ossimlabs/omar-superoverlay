@@ -3,28 +3,12 @@ package omar.superoverlay
 import grails.testing.gorm.DataTest
 import grails.testing.spring.AutowiredTest
 import grails.testing.web.controllers.ControllerUnitTest
+import org.springframework.http.HttpStatus
 import spock.lang.Specification
 
-class SuperOverlayControllerSpec extends Specification implements AutowiredTest {
-    void setupSpec() {
-        // Leaving dead code here for possible future tests.
-        //        LayerInfo layerInfo = new LayerInfo()
-        //        WorkspaceInfo workspaceInfo = new WorkspaceInfo()
-        //        def workspaceParams = ['foo': 'bar']
-        //        StringBuffer kmlFeatures = new StringBuffer()
-        //        workspaceInfo.workspaceParams = workspaceParams
-        //        layerInfo.workspaceInfo = workspaceInfo
-        //        service.geoscriptService = Stub(GeoscriptService) {
-        //            findLayerInfo(_) >> layerInfo
-        //            parseOptions(_) >> Object
-        //            getWorkspace(_) >> workspaceInfo
-        //        }
-        //        service.kmlService = Stub(KmlService) {
-        //            getFeaturesKml(_) >> kmlFeatures
-        //        }
+import java.net.http.HttpResponse
 
-    }
-
+class SuperOverlayControllerSpec extends Specification implements ControllerUnitTest<SuperOverlayController>{
     void 'KmlQueryCommand default maxFeatures, default footprints, default bbox'() {
         when:
         def cmd = new KmlQueryCommand(footprints: '')
@@ -89,5 +73,28 @@ class SuperOverlayControllerSpec extends Specification implements AutowiredTest 
 
         then:
         cmd.getBBOX() == null
+    }
+
+    void 'kmlQuery status UNPROCESSABLE_ENTITY (422) for invalid bbox: 1,2'() {
+        when:
+        params.bbox = "1,2"
+        controller.kmlQuery()
+
+        then:
+        status == HttpStatus.UNPROCESSABLE_ENTITY.value()
+    }
+
+    void 'kmlQuery status OK (200) valid bbox: 1,2,3,4'() {
+        given:
+        controller.superOverlayService = Stub(SuperOverlayService) {
+            kmlQuery(_) >> "testing"
+        }
+        params.bbox = "1,2,3,4"
+
+        when:
+        controller.kmlQuery()
+
+        then:
+        status == HttpStatus.OK.value()
     }
 }
