@@ -3,11 +3,14 @@ package omar.superoverlay
 import grails.validation.Validateable
 import org.springframework.beans.factory.annotation.Value
 
+/**
+ * Command object to enforce business rules for SuperOverlay Controller and Service
+ */
 class KmlQueryCommand implements Validateable {
     Integer maxFeatures = 10
     String footprints = "on"
     String bbox = "-180,-90,180,90"
-    List<Integer> listBBOX
+    List<Double> listBBOX
 
     @Value('${superoverlay.service.default-features}')
     Integer configDefaultFeatures
@@ -27,15 +30,23 @@ class KmlQueryCommand implements Validateable {
     }
 
     /**
-     * Enforce range [0,100]
-     * @param val
-     * @return
+     * Enforce maxFeatures range [0,100].
+     * If maxFeatures is lower or higher it will be modified to be at the upper or lower boundary.
+     *
+     * @param maxFeatures param
      */
     void validateMaxFeatures(val) {
         if (val < configMinFeatures) maxFeatures = configMinFeatures
         else if (val > configMaxFeatures) maxFeatures = configMaxFeatures
     }
 
+    /**
+     * Enforce bbox param is provided that it has 4 boundaries, BBOX size is at most -180,-90,180,90, converted
+     * bbox param to List<Double> if valid.
+     *
+     * @param bbox param
+     * @return true if bbox param is valid and converted to List<Double>
+     */
     boolean validateBbox(val) {
         try {
             def b = val.split(",").collect({ it as Double })
@@ -57,7 +68,12 @@ class KmlQueryCommand implements Validateable {
         }
     }
 
-    List<Integer> getBBOX() {
+    /**
+     * Get the list representation of the maxFeatures param
+     *
+     * @return bbox param as a list
+     */
+    List<Double> getBBOX() {
         return listBBOX
     }
  }
