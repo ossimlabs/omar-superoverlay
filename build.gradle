@@ -101,6 +101,10 @@ subprojects { project ->
             maven { url "https://repo.grails.org/grails/core" }
         }
 
+        configurations.all {
+	     exclude group: 'hsqldb', module: 'hsqldb'
+        }
+
         configurations {
             developmentOnly
             runtimeClasspath {
