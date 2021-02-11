@@ -3,6 +3,7 @@ package omar.superoverlay
 import org.springframework.beans.factory.InitializingBean
 
 import io.swagger.annotations.*
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 
 import java.util.zip.ZipEntry
@@ -26,6 +27,15 @@ class SuperOverlayController implements InitializingBean
   def dataSource
   def geoscriptService
 
+  @Value('${superoverlay.service.default-features}')
+  Integer configDefaultFeatures
+
+  @Value('${superoverlay.service.max-features}')
+  Integer configMaxFeatures
+
+  @Value('${superoverlay.service.min-features}')
+  Integer configMinFeatures
+
   def index()
   {
     render ""
@@ -36,7 +46,11 @@ class SuperOverlayController implements InitializingBean
       httpMethod="GET"
   )
   @ApiImplicitParams( [
-      @ApiImplicitParam( name = 'id', value = 'id of the image (can be database id, image id, or index id)', paramType = 'path', dataType = 'string', required = true )
+      @ApiImplicitParam( name = 'id',
+              value = 'id of the image (can be database id, image id, or index id)',
+              paramType = 'path',
+              dataType = 'string',
+              required = true )
   ] )
   def createKml()
   {
@@ -228,7 +242,13 @@ class SuperOverlayController implements InitializingBean
             value = "The maximum number of images to be returned. Requests greater than the allowable range are limited to the upper range limit."
         )
     ])
-    def kmlQuery(@ApiParam (hidden = true, type='string', required=false) KmlQueryCommand cmd) {
+    def kmlQuery() {
+        KmlQueryCommand cmd = new KmlQueryCommand()
+        cmd.setMinFeatures(configMinFeatures)
+        cmd.setMaxFeatures(configMaxFeatures)
+        if (params.bbox) cmd.setBbox(params.bbox)
+        if (params.footprints) cmd.setFootprints(params.footprints)
+        if (params.maxFeatures) cmd.setMaxFeatures(params.maxFeatures)
         cmd.validate()
         if (cmd.errors.hasErrors()) {
           render status: HttpStatus.UNPROCESSABLE_ENTITY

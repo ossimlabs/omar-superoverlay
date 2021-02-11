@@ -66,30 +66,30 @@ subprojects { project ->
                 mavenRepoPassword = getConfigurationProperty( 'MAVEN_REPO_PASSWORD', 'mavenRepoPassword')
             }
 
-            project.with {
-              publishing {
-                    publications {
-                        "${project.name}" (MavenPublication) {
-                            group groupName
-                            groupId = groupName
-                            version project.version
-                            from components.java
-                        }
-                    }
-                    repositories {
-                    maven {
-                        credentials {
-                            username mavenRepoUsername
-                            password mavenRepoPassword
-                            }
-                            url = mavenPublishUrl.toLowerCase()
-                        }
-                    }                
-                    jar.onlyIf {
-                        !file(jarDestination).exists()
-                    }
-                }
-            }
+//            project.with {
+//              publishing {
+//                    publications {
+//                        "${project.name}" (MavenPublication) {
+//                            group groupName
+//                            groupId = groupName
+//                            version project.version
+//                            from components.java
+//                        }
+//                    }
+//                    repositories {
+//                    maven {
+//                        credentials {
+//                            username mavenRepoUsername
+//                            password mavenRepoPassword
+//                            }
+//                            url = mavenPublishUrl.toLowerCase()
+//                        }
+//                    }
+//                    jar.onlyIf {
+//                        !file(jarDestination).exists()
+//                    }
+//                }
+//            }
         }
 
         apply plugin:"asset-pipeline"

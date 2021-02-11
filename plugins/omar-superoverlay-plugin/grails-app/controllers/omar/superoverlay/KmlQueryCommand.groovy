@@ -8,26 +8,22 @@ import org.springframework.beans.factory.annotation.Value
  */
 class KmlQueryCommand implements Validateable {
     Integer maxFeatures = 10
+    Integer minFeatures = 0
     String footprints = "on"
     String bbox = "-180,-90,180,90"
     List<Double> listBBOX
 
-    @Value('${superoverlay.service.default-features}')
-    Integer configDefaultFeatures
-
-    @Value('${superoverlay.service.max-features}')
-    Integer configMaxFeatures
-
-    @Value('${superoverlay.service.min-features}')
-    Integer configMinFeatures
-
     static constraints = {
         footprints blank: false, nullable: true
         maxFeatures(nullable: false, validator: { val, obj, errors ->
-            if (!obj.validateMaxFeatures(val)) { errors.rejectValue('maxFeatures', 'invalid range') }
+            if (!obj.validateMaxFeatures(val)) {
+                errors.rejectValue('maxFeatures', 'invalid range')
+            }
         })
         bbox(blank: false, nullable: true, validator: { val, obj, errors ->
-            if (!obj.validateBbox(val)) { errors.rejectValue('bbox', 'invalid format') }
+            if (!obj.validateBbox(val)) {
+                errors.rejectValue('bbox', 'invalid format')
+            }
         })
     }
 
@@ -38,10 +34,10 @@ class KmlQueryCommand implements Validateable {
      * @param maxFeatures param
      */
     boolean validateMaxFeatures(val) {
-        if (val < configMinFeatures)
+        if (val < minFeatures)
             return false
-        if (val > configMaxFeatures)
-            maxFeatures = configMaxFeatures
+        if (val > maxFeatures)
+            maxFeatures = maxFeatures
         return true
     }
 
