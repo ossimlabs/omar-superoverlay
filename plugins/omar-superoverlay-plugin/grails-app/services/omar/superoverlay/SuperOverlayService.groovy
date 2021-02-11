@@ -526,7 +526,7 @@ class SuperOverlayService implements InitializingBean
         def bbox = kmlQueryCmd.getBBOX()
         def polygon = new Bounds(bbox[0], bbox[1], bbox[2], bbox[3]).createRectangle(4, 0)
         def filter = "INTERSECTS(ground_geom,${polygon})"
-      
+
         // conduct a search for imagery
         def wfsParams = [
             filter: filter,
