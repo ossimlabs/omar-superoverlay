@@ -34,17 +34,6 @@ class SuperOverlayService implements InitializingBean
 
   def geometryFactory = new GeometryFactory( new PrecisionModel( PrecisionModel.FLOATING ), 4326 )
 
-
-  @Value('${superoverlay.service.default-features}')
-  Integer configDefaultFeatures
-
-  @Value('${superoverlay.service.max-features}')
-  Integer configMaxFeatures
-
-  @Value('${superoverlay.service.min-features}')
-  Integer configMinFeatures
-
-
   def canSplit(def tileBounds, def fullResMetersPerPixel)
   {
     def metersPerPixel = getMetersPerPixel( tileBounds, fullResMetersPerPixel )
@@ -527,6 +516,7 @@ class SuperOverlayService implements InitializingBean
         def polygon = new Bounds(bbox[0], bbox[1], bbox[2], bbox[3]).createRectangle(4, 0)
         def filter = "INTERSECTS(ground_geom,${polygon})"
 
+
         // conduct a search for imagery
         def wfsParams = [
             filter: filter,
@@ -543,9 +533,12 @@ class SuperOverlayService implements InitializingBean
             workspace.close()
         }
 
-        def kml = kmlService.getFeaturesKml(features, params)
-
-
+      def params = [
+              footprints: kmlQueryCmd.getFootprints(),
+              maxFeatures: kmlQueryCmd.getMaxFeatures(),
+              bbox: kmlQueryCmd.getBbox()
+      ]
+      def kml = kmlService.getFeaturesKml(features, params)
         return kml
     }
 
