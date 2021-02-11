@@ -228,7 +228,7 @@ class SuperOverlayController implements InitializingBean
             value = "The maximum number of images to be returned. Requests greater than the allowable range are limited to the upper range limit."
         )
     ])
-    def kmlQuery(@ApiParam (hidden = true, type='string', required='false') KmlQueryCommand cmd) {
+    def kmlQuery(@ApiParam (hidden = true, type='string', required=false) KmlQueryCommand cmd) {
         cmd.validate()
         if (cmd.errors.hasErrors()) {
           render status: HttpStatus.UNPROCESSABLE_ENTITY
