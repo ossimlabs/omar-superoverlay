@@ -225,7 +225,7 @@ class SuperOverlayController implements InitializingBean
             required = false,
             defaultValue = "10",
             allowableValues = "range[0, 100]",
-            value = "The maximum number of images to be returned. Requests greater than the allowable range are limited to the upper range limit."
+            value = "The maximum number of images to be returned. Requests greater than the allowable range [0,100] are limited to the upper range limit."
         )
     ])
     def kmlQuery(@ApiParam (hidden=true, required=false) KmlQueryCommand cmd) {
