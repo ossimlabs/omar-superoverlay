@@ -522,7 +522,7 @@ class SuperOverlayService implements InitializingBean
         return kmlBuilder.bind( kmlNode ).toString()
     }
 
-    def kmlQuery(kmlQueryCmd) {
+    def kmlQuery(def kmlQueryCmd) {
         def bbox = kmlQueryCmd.getBBOX()
         def polygon = new Bounds(bbox[0], bbox[1], bbox[2], bbox[3]).createRectangle(4, 0)
         def filter = "INTERSECTS(ground_geom,${polygon})"
@@ -530,7 +530,7 @@ class SuperOverlayService implements InitializingBean
         // conduct a search for imagery
         def wfsParams = [
             filter: filter,
-            maxFeatures: validatedParams.maxFeatures,
+            maxFeatures: kmlQueryCmd.getMaxFeatures(),
             typeName: "omar:raster_entry"
         ]
         def layerInfo = geoscriptService.findLayerInfo( wfsParams )
