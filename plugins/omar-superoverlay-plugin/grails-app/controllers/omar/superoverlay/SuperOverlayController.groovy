@@ -48,7 +48,7 @@ class SuperOverlayController implements InitializingBean
   @ApiImplicitParams( [
       @ApiImplicitParam( name = 'id',
               value = 'id of the image (can be database id, image id, or index id)',
-              paramType = 'path',
+              paramType = 'query',
               dataType = 'string',
               required = true )
   ] )
