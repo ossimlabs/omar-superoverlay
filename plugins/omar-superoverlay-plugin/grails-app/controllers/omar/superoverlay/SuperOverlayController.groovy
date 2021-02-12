@@ -36,7 +36,7 @@ class SuperOverlayController implements InitializingBean
       httpMethod="GET"
   )
   @ApiImplicitParams( [
-      @ApiImplicitParam( name = 'id', value = 'id of the image (can be database id, image id, or index id)', paramType = 'path', dataType = 'string', required = true )
+      @ApiImplicitParam( name = 'id', value = 'id of the image (can be database id, image id, or index id)', paramType = 'query', dataType = 'string', required = true )
   ] )
   def createKml()
   {
@@ -224,11 +224,10 @@ class SuperOverlayController implements InitializingBean
             paramType = 'query',
             required = false,
             defaultValue = "10",
-            allowableValues = "range [0, 100]",
-            value = "The maximum number of images to be returned. Requests greater than the allowable range are limited to the upper range limit."
+            value = "The maximum number of images to be returned -- Range [0,100]. Requests greater than the allowable range are limited to the upper range limit."
         )
     ])
-    def kmlQuery(KmlQueryCommand cmd) {
+    def kmlQuery(@ApiParam (hidden=true, required=false) KmlQueryCommand cmd) {
         cmd.validate()
         if (cmd.errors.hasErrors()) {
           render status: HttpStatus.UNPROCESSABLE_ENTITY
