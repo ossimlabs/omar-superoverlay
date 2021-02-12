@@ -36,7 +36,7 @@ class SuperOverlayController implements InitializingBean
       httpMethod="GET"
   )
   @ApiImplicitParams( [
-      @ApiImplicitParam( name = 'id', value = 'id of the image (can be database id, image id, or index id)', paramType = 'path', dataType = 'string', required = true )
+      @ApiImplicitParam( name = 'id', value = 'id of the image (can be database id, image id, or index id)', paramType = 'query', dataType = 'string', required = true )
   ] )
   def createKml()
   {
