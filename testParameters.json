@@ -45,10 +45,10 @@
     "createKml": {
       "method": "get",
       "endpoint": "/superOverlay/createKml",
-      "in": "path",
+      "in": "query",
       "expected": "good",
       "parameters": {
-        "id": "9988"
+        "id": "1265"
       }
     }
   }
