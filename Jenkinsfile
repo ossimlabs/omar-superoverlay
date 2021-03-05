@@ -105,12 +105,12 @@ node(POD_LABEL){
             }
                 sh """
                     npm i -g xunit-viewer
-                    xunit-viewer -r results -o results/${APP_NAME}-test-results.html
+                    xunit-viewer -r results -o results/omar-superoverlay-test-results.html
                 """
                     junit 'results/*.xml'
                     archiveArtifacts "results/*.xml"
                     archiveArtifacts "results/*.html"
-                    s3Upload(file:'results/${APP_NAME}-test-results.html', bucket:'ossimlabs', path:'cypressTests/')
+                    s3Upload(file:'results/omar-superoverlay-test-results.html', bucket:'ossimlabs', path:'cypressTests/')
                 }
             }
 
