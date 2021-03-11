@@ -8,6 +8,8 @@ if ( System.getenv('O2_INLINE_BUILD') ) {
     }
 }
 dependencies {
+    testCompile 'org.spockframework:spock-core'
+
     //compile project( ":${ rootProject.name }-lib" )
     if ( ! System.getenv('O2_INLINE_BUILD') ) {
        compile "io.ossim.omar.plugins:omar-geoscript-plugin:+"

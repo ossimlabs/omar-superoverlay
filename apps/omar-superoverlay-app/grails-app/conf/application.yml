@@ -215,3 +215,9 @@ omar:
 # Set the context path for the application.
 server:
   contextPath: /omar-superoverlay
+  
+superoverlay:
+    service:
+        default-features: 10
+        max-features: 100
+        min-features: 0

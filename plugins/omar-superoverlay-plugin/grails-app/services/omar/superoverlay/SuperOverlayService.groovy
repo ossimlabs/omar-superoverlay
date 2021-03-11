@@ -8,6 +8,8 @@ import geoscript.geom.*
 import geoscript.workspace.Workspace
 import grails.gorm.transactions.Transactional
 import groovy.xml.StreamingMarkupBuilder
+import org.springframework.beans.factory.annotation.Value
+
 import java.awt.image.BufferedImage
 //import org.ossim.omar.core.Utility
 //import org.ossim.omar.ogc.WmsCommand
@@ -509,30 +511,16 @@ class SuperOverlayService implements InitializingBean
         return kmlBuilder.bind( kmlNode ).toString()
     }
 
-    def kmlQuery(params) {
-        // make sure the BBOX is valid
-        def bbox = params.BBOX?.split(",").collect({ it as Double })
-        if ( bbox ) {
-            if ( bbox[0] < -180 ) { bbox[0] = -180 }
-            if ( bbox[1] < -90 ) { bbox[1] = -90 }
-            if ( bbox[2] > 180 ) { bbox[2] = 180 }
-            if ( bbox[3] > 90 ) { bbox[3] = 90 }
-        }
-        else { bbox = [-180, -90, 180, 90] }
-
+    def kmlQuery(def kmlQueryCmd) {
+        def bbox = kmlQueryCmd.getBBOX()
         def polygon = new Bounds(bbox[0], bbox[1], bbox[2], bbox[3]).createRectangle(4, 0)
         def filter = "INTERSECTS(ground_geom,${polygon})"
 
-        // limit the number of possible returns
-        def maxFeatures = params.maxFeatures ?: 10
-        if (!maxFeatures.toString().isNumber()) { maxFeatures = 10 }
-        else { maxFeatures = maxFeatures as Integer }
-        if (maxFeatures > 100) { maxFeatures = 100 }
 
         // conduct a search for imagery
         def wfsParams = [
             filter: filter,
-            maxFeatures: maxFeatures,
+            maxFeatures: kmlQueryCmd.getMaxFeatures(),
             typeName: "omar:raster_entry"
         ]
         def layerInfo = geoscriptService.findLayerInfo( wfsParams )
@@ -545,9 +533,12 @@ class SuperOverlayService implements InitializingBean
             workspace.close()
         }
 
-        def kml = kmlService.getFeaturesKml(features, params)
-
-
+      def params = [
+              footprints: kmlQueryCmd.getFootprints(),
+              maxFeatures: kmlQueryCmd.getMaxFeatures(),
+              bbox: kmlQueryCmd.getBbox()
+      ]
+      def kml = kmlService.getFeaturesKml(features, params)
         return kml
     }
 
